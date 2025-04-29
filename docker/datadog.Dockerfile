@@ -1,4 +1,4 @@
-FROM python:3.8.5-slim-buster
+FROM python:3.13.3-slim
 
 ENV METRICS_PORT=8125
 ENV TRACE_PORT=8126
@@ -9,10 +9,11 @@ ENV UDS_PATH=/var/run/datadog/dsd.socket
 # NOTE: ``PYTHONUNBUFFERED`` **must** be set when running in a detached
 #       container.
 ENV PYTHONUNBUFFERED=true
-ENV FLASK_APP app
-ENV FLASK_ENV development
+ENV FLASK_APP=app
+ENV FLASK_ENV=development
 
 RUN python -m pip install --upgrade pip
+RUN pip install setuptools
 
 COPY requirements.txt /var/code/requirements.txt
 RUN python -m pip install --requirement /var/code/requirements.txt
