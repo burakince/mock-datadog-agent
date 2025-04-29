@@ -1,5 +1,11 @@
 FROM python:3.13.3-slim
 
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV METRICS_PORT=8125
 ENV TRACE_PORT=8126
 EXPOSE "${METRICS_PORT}/udp"
