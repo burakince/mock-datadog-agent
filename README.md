@@ -1,78 +1,26 @@
-# `local-dd-agent`
+# `mock-datadog-agent`
 
-> "Mock" Datadog Agent That Can Be Run Locally
-
-## Motivation
-
-During local development, developers often just turn off `datadog`. We just
-trust that our application metrics and traces will work as expected when
-deployed to environments where `dd-agent` is running.
-
-This is especially challenging when things **go wrong**. For example, sometimes
-a task will exit before flushing all metrics out to `dd-agent` and debugging
-an application in Kubernetes is a much larger challenge than debugging it
-on a development machine. Or sometimes a client library may have a latent
-bug we don't discover until production.
+This project is based on https://github.com/dhermes/local-dd-agent repository.
 
 ## Usage
 
-```
-$ make  # or `make help`
-Makefile for `local-dd-agent` project
-
-Usage:
-   make build    Build Docker container with `local-dd-agent`
-   make run      Run Docker container with `local-dd-agent` in the foreground
-
-```
-
 To build
 
-```
-$ make build
-docker build \
-          --tag dhermes/local-dd-agent:latest \
-          --file docker/datadog.Dockerfile \
-          .
-Sending build context to Docker daemon  27.14kB
-Step 1/16 : FROM python:3.8.5-slim-buster
- ---> ec75d34adff9
-...
-Removing intermediate container 12c4359fa62e
- ---> ab9fe6ed4e8f
-Successfully built ab9fe6ed4e8f
-Successfully tagged dhermes/local-dd-agent:latest
+```bash
+docker build -f docker/datadog.Dockerfile . -t burakince/mock-datadog-agent
 ```
 
 To run
 
-```
-$ make run
-+ docker run --name local-dd-agent --rm --interactive --tty --publish 8125:8125/udp --publish 8126:8126/tcp dhermes/local-dd-agent:latest
-+ python3 src/python/forward_to.py
-2020-09-25 03:17:03,249 INFO Set uid to user 0 succeeded
-2020-09-25 03:17:03,250 INFO supervisord started with pid 1
-2020-09-25 03:17:04,258 INFO spawned: 'processes' with pid 8
-2020-09-25 03:17:04,261 INFO spawned: 'port-8125' with pid 9
-2020-09-25 03:17:04,264 INFO spawned: 'port-8126' with pid 10
-2020-09-25 03:17:04,266 INFO spawned: 'uds' with pid 11
-READY
-...
+```bash
+docker run --name mock-datadog-agent --rm --interactive --tty --publish 8125:8125/udp --publish 8126:8126/tcp burakince/mock-datadog-agent:latest
 ```
 
-and the UDS path can be overriden on the host (it will default to
-`$(pwd)/var-run-datadog/dsd.socket` if not supplied):
+## Example `mock-datadog-agent` Logs
 
-```
-$ make run DATADOG_ADDRESS="${HOME}/Desktop/dsd.socket"
-...
-```
+![mock-datadog-agent logs][1]
 
-## Example `local-dd-agent` Logs
-
-![local-dd-agent logs][1]
-
-```
+```bash
 001-001-8126 | trace =
 001-001-8126 | {
 001-001-8126 |   "trace_id": 529874070487136501,
