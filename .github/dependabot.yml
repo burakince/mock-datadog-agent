@@ -35,5 +35,8 @@ updates:
     directory: "docker"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "python"
+        update-types: ["version-update:semver-minor"]
     reviewers:
       - "burakince"
