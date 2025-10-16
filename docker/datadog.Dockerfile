@@ -1,4 +1,4 @@
-FROM python:3.13.8-slim AS builder
+FROM python:3.13.9-slim AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir setuptools
 COPY requirements.txt /var/code/requirements.txt
 RUN pip install --no-cache-dir --requirement /var/code/requirements.txt
 
-FROM python:3.13.8-slim AS runner
+FROM python:3.13.9-slim AS runner
 
 COPY src/python/app.py \
      src/python/counter.py \
