@@ -154,9 +154,9 @@ msgpack==1.1.2 \
     --hash=sha256:fac4be746328f90caa3cd4bc67e6fe36ca2bf61d5c6eb6d895b6527e3f05071e \
     --hash=sha256:fffee09044073e69f2bad787071aeec727183e7580443dfeb8556cbf1978d162
     # via -r requirements.txt.in
-pyasynchat==1.0.4 \
-    --hash=sha256:167feb25d635a01b61338e17e9ab1e3372cd9274005af4083dcda52d51f64a76 \
-    --hash=sha256:3f5333df649e46c56d48c57e6a4b7163fd07f626bfd884e22ef373ab3c3a4670
+pyasynchat==1.0.5 \
+    --hash=sha256:35b7859515693e479e8d95ebe9f32cbf4d6312ab7599ced39fc24699e51de46f \
+    --hash=sha256:36665473ae730dac51e6d7dad70f8295962120c830ab692f0a31efba32687e24
     # via -r requirements.txt.in
 pyasyncore==1.0.4 \
     --hash=sha256:2c7a8b9b750ba6260f1e5a061456d61320a80579c6a43d42183417da89c7d5d6 \
