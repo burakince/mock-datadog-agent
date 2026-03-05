@@ -36,7 +36,7 @@ jobs:
         uses: sigstore/cosign-installer@v4.0.0
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         with:
           platforms: all
 
@@ -49,7 +49,7 @@ jobs:
       - name: Login to Docker Hub
         id: docker_hub_login
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: docker.io
           username: ${{ github.actor }}
@@ -60,7 +60,7 @@ jobs:
       - name: Login to GitHub Container Registry
         id: ghcr_login
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -91,7 +91,7 @@ jobs:
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@v6.18.0
+        uses: docker/build-push-action@v6.19.2
         with:
           context: .
           file: docker/datadog.Dockerfile
